@@ -33,6 +33,7 @@ def generate_response(topic):
 
 
 topic_text = st.text_input("Enter topic: ")
+max_length = st.slider("Max length", 100, 500, 400)
 if not openai_api_key.startswith("sk-"):
     st.warning("Enter OpenAI API Key")
 if openai_api_key.startswith("sk-"):

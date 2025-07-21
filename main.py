@@ -23,9 +23,9 @@ def generate_response(topic, tam, language):
     First, print the blog post.
     Then, sum the total number of words on it and print the result like this: This post has X words.
     Remember to use the {language} language.
-    Add some references to the topic and make it engaging for readers.
-    Do not include any code blocks or markdown formatting.
-    Do not include any explanations or additional text.
+    Add the sources used to write the blog post at the end of the response, like this: Sources: [source1, source2, ...]
+    Do not include any other text or explanation, just the blog post and the sources.
+    Do not use any markdown formatting.
     """
     prompt = PromptTemplate(
         input_variables = ["topic", "tam","language"],

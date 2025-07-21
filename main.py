@@ -13,7 +13,7 @@ openai_api_key = st.sidebar.text_input(
     type = "password"
 )
 
-def generate_response(topic, tam):
+def generate_response(topic, tam, language):
     llm = OpenAI(openai_api_key=openai_api_key)
     template = """
     As experienced startup and venture capital writer, 
@@ -22,20 +22,25 @@ def generate_response(topic, tam):
     Your response should be in this format:
     First, print the blog post.
     Then, sum the total number of words on it and print the result like this: This post has X words.
+    Remember to use the {language} language.
     """
     prompt = PromptTemplate(
-        input_variables = ["topic", "tam"],
+        input_variables = ["topic", "tam","language"],
         template = template
     )
-    query = prompt.format(topic=topic, tam=tam)
+    query = prompt.format(topic=topic, tam=tam, language=language)
     response = llm(query, max_tokens=2048)
     return st.write(response)
 
 
 topic_text = st.text_input("Enter topic: ")
 max_length = st.slider("Max length", 100, 500, 4000)
+text_language = st.selectbox(
+    "Language",
+    ["English", "Spanish", "French", "German", "Italian"]
+)
 if not openai_api_key.startswith("sk-"):
     st.warning("Enter OpenAI API Key")
 if openai_api_key.startswith("sk-"):
-    generate_response(topic_text, max_length)
+    generate_response(topic_text, max_length, text_language)
         

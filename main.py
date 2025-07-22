@@ -37,7 +37,11 @@ def generate_response(topic, tam, language):
 
 
 topic_text = st.text_input("Enter topic: ")
-max_length = st.slider("Max length", 100, 500, 4000)
+max_length = st.slider("Max length", 100, 50, 400)
+text_tone = st.selectbox(
+    "Tone",
+    ["Professional", "Casual", "Friendly", "Formal", "Informative"]
+)
 text_language = st.selectbox(
     "Language",
     ["English", "Spanish", "French", "German", "Italian"]

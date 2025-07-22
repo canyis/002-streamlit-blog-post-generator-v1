@@ -13,7 +13,7 @@ openai_api_key = st.sidebar.text_input(
     type = "password"
 )
 
-def generate_response(topic, tam, language):
+def generate_response(topic, tam, language, tone):
     llm = OpenAI(openai_api_key=openai_api_key)
     template = """
     As experienced startup and venture capital writer, 
@@ -28,10 +28,10 @@ def generate_response(topic, tam, language):
     Do not use any markdown formatting.
     """
     prompt = PromptTemplate(
-        input_variables = ["topic", "tam","language"],
+        input_variables = ["topic", "tam","language", "tone"],
         template = template
     )
-    query = prompt.format(topic=topic, tam=tam, language=language)
+    query = prompt.format(topic=topic, tam=tam, language=language, tone=tone)
     response = llm(query, max_tokens=2048)
     return st.write(response)
 
@@ -49,5 +49,5 @@ text_language = st.selectbox(
 if not openai_api_key.startswith("sk-"):
     st.warning("Enter OpenAI API Key")
 if openai_api_key.startswith("sk-"):
-    generate_response(topic_text, max_length, text_language)
+    generate_response(topic_text, max_length, text_language, text_tone)
         
